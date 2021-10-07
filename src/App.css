@@ -10,3 +10,10 @@
 .card-body{
   background-color: rgb(196, 208, 248);  
 }
+
+.card-footer{
+  justify-content:center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
