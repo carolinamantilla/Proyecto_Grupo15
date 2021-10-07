@@ -1,28 +1,23 @@
 import './App.css';
 import React from 'react';
-import GoogleLogin from 'react-google-login';
-import {Container} from 'reactstrap';
+import Login from "./componentes/Login";
+import {Route, BrowserRouter as Router} from "react-router-dom";
 
-const responseGoogle = (response) => {
-  console.log(response);
-}
 
 function App() {
  return(
-  <Container>
-      <div className="App">
-        <b /><b />
-        <GoogleLogin 
-        clientId="892636235404-l62fs4fq03m2eds9okkqskfdb5v2i10q.apps.googleusercontent.com"
-        buttonText="Iniciar Sesión"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={'single_host_origin'}
-        />
+    <Router>
+      <div className="container">
+        <div class="card">
+          <div class="card-header">
+            <b>Sistema de Ventas</b>
+          </div>
+          <div class="card-body">
+            <Route component={Login}></Route>
+          </div>
+        </div>
       </div>
-      
-      
-    </Container>
+    </Router>
   );
 }
 

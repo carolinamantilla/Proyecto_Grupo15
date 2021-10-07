@@ -1,9 +1,12 @@
-.App{
+.container{
   background-image: url("./elemento/imagen/foto.jpeg");
   justify-content:center;
   min-height: 100vh;
   display: flex;
   flex-direction: row;
   align-items: center;
-  
+}
+
+.card-body{
+  background-color: rgb(196, 208, 248);  
 }
