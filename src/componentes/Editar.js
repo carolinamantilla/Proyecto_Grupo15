@@ -60,30 +60,6 @@ class Editar extends React.Component {
                                 <small id="helpId" className="text-muted">Fecha de la venta</small>
                                 </div>
                             </div>
-                        
-                        </div>
-
-                        <div className="row">    
-
-                            <div className="col-md-3">  
-                                <div className="form-group">
-                                <label htmlFor="">ID Cliente:</label>
-                                <input type="text" name="idCliente" onChange={this.cambioValor} value={venta.idCliente} id="idCliente" className="form-control" placeholder="" aria-describedby="helpId"/>
-                                <small id="helpId" className="text-muted">Identificación del Cliente</small>
-                                </div>
-                            </div>
-                            
-                            <div className="col-md-8">
-                                <div className="form-group">
-                                <label htmlFor="">Nombre del Cliente:</label>
-                                <input type="text" name="nombreCliente" onChange={this.cambioValor} value={venta.nombreCliente} id="nombreCliente" className="form-control" placeholder="" aria-describedby="helpId"/>
-                                <small id="helpId" className="text-muted">Ingrese el nombre y apellido del cliente</small>
-                                </div>
-                            </div>
-                        
-                        </div>
-
-                        <div className="row">    
 
                             <div className="col-md-3">  
                                 <div className="form-group">
@@ -101,7 +77,27 @@ class Editar extends React.Component {
                                     onChange={this.handleChange}
                                     options={options}
                                 />
-                                <small id="helpId" className="text-muted">Seleccione el estado de la venta</small>
+                                <small id="helpId" className="text-muted">Estado de la venta</small>
+                                </div>
+                            </div>
+                        
+                        </div>
+
+                        <div className="row">    
+
+                            <div className="col-md-3">  
+                                <div className="form-group">
+                                <label htmlFor="">ID Cliente:</label>
+                                <input type="text" name="idCliente" onChange={this.cambioValor} value={venta.idCliente} id="idCliente" className="form-control" placeholder="" aria-describedby="helpId"/>
+                                <small id="helpId" className="text-muted">Identificación del Cliente</small>
+                                </div>
+                            </div>
+                            
+                            <div className="col-md-8">
+                                <div className="form-group">
+                                <label htmlFor="">Nombre del Cliente:</label>
+                                <input type="text" name="nombreCliente" onChange={this.cambioValor} value={venta.nombreCliente} id="nombreCliente" className="form-control" placeholder="" aria-describedby="helpId"/>
+                                <small id="helpId" className="text-muted">Nombre y apellido del cliente</small>
                                 </div>
                             </div>
                         
@@ -133,6 +129,43 @@ class Editar extends React.Component {
                                 </div>
                             </div>
 
+                            <div className="col-md-3 ">
+                                <br/>
+                                <div className="btn-group" role="group" aria-label="">
+                                    <button type="button" className="btn btn-secondary">📥Editar Producto</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div className="row"> 
+
+                            <div className="col-md-10 ">
+                            <table className="table">
+                            <thead>
+                                <tr>
+                                <th>ID Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unitario</th>
+                                <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>3</td>
+                                    <td>99900</td>
+                                    <td>
+                                        <div className="btn-group" role="group" aria-label="">
+                                            <button type="button" className="btn btn-primary"> 📝 </button>
+                                            <button type="button" className="btn btn-danger"> 🗑 </button>
+                                        </div>
+                                    </td>
+                                </tr>  
+                            </tbody>
+                            </table>
+                            </div>
+
                             <div className="col-md-3">
                                 <div className="form-group">
                                 <label htmlFor="">Valor Total:</label>
@@ -140,6 +173,7 @@ class Editar extends React.Component {
                                 <small id="helpId" className="text-muted">Valor total de la venta</small>
                                 </div>
                             </div>
+                            
                         
                         </div>
                    </form>

@@ -32,9 +32,9 @@ class Listar extends React.Component {
         await this.setState({busqueda: e.target.value});
         this.filtrarBusqueda();
       
-      }
+    }
     
-      filtrarBusqueda=()=>{
+    filtrarBusqueda=()=>{
         var search=ventas.filter(item=>{
           if (item.idVenta.toString().includes(this.state.busqueda)||
           item.fecha.toString().includes(this.state.busqueda)||
@@ -48,11 +48,11 @@ class Listar extends React.Component {
           }
         });
         this.setState({ventas: search});
-      }
+    }
     
-      componentDidMount(){
+    componentDidMount(){
         this.setState({ventasB: this.state.ventas});
-      }
+    }
 
     render() { 
 
@@ -77,50 +77,46 @@ class Listar extends React.Component {
 
             <div className="card-body">
                 <h4>Lista de Ventas</h4>
-              <table className="table">
-            <thead>
-                <tr>
-                <th>ID Venta</th>
-                <th>Fecha</th>
-                <th>ID Cliente</th>
-                <th>Nombre Cliente</th>
-                <th>ID Vendedor</th>
-                <th>Estado</th>
-                <th>Valor Total</th>
-                <th>Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {ventas.map(
-                    (venta) => (
-                     
-                    <tr>
-                        <td>{venta.idVenta}</td>
-                        <td>{venta.fecha}</td>
-                        <td>{venta.idCliente}</td>
-                        <td>{venta.nombreCliente}</td>
-                        <td>{venta.idVendedor}</td>
-                        <td>{venta.estado}</td>
-                        <td>{venta.valorTotal}</td>
-                        <td>
-                            <div className="btn-group" role="group" aria-label="">
-                                <Link className="btn btn-primary" to={"/editar"}> 📝 </Link>
-                                <button type="button" className="btn btn-danger"
-                                onClick={()=>this.borrarRegistros(venta.idVenta)}
-                                > 🗑 </button>
-                                
-                            </div>
-                        </td>
-                    </tr>  
-
-
-                    )
-                )}
-                
-            </tbody>
-        </table>  
-
-        </div>
+                <table className="table">
+                    <thead>
+                        <tr>
+                        <th>ID Venta</th>
+                        <th>Fecha</th>
+                        <th>ID Cliente</th>
+                        <th>Nombre Cliente</th>
+                        <th>ID Vendedor</th>
+                        <th>Estado</th>
+                        <th>Valor Total</th>
+                        <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {ventas.map(
+                        (venta) => (
+                        
+                        <tr>
+                            <td>{venta.idVenta}</td>
+                            <td>{venta.fecha}</td>
+                            <td>{venta.idCliente}</td>
+                            <td>{venta.nombreCliente}</td>
+                            <td>{venta.idVendedor}</td>
+                            <td>{venta.estado}</td>
+                            <td>{venta.valorTotal}</td>
+                            <td>
+                                <div className="btn-group" role="group" aria-label="">
+                                    <Link className="btn btn-primary" to={"/editar"}> 📝 </Link>
+                                    <button type="button" className="btn btn-danger"
+                                    onClick={()=>this.borrarRegistros(venta.idVenta)}
+                                    > 🗑 </button>
+                                    
+                                </div>
+                            </td>
+                        </tr>  
+                        )
+                        )}
+                    </tbody>
+                </table>  
+            </div>
             <div className="card-footer text-muted">
                
             </div>
