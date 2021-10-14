@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-const ventas= [
+const sales= [
     {idVenta: 1, fecha: "2021-09-13", idCliente: "1478", nombreCliente: "Andrés Duarte", idVendedor: "001 - Bruno", estado: "En proceso", 
       valorTotal: 800000,  },
     {idVenta: 2, fecha: "2021-09-20", idCliente: "4569", nombreCliente: "Paola Palacios", idVendedor: "002 - Carolina", estado: "Entregada", 
@@ -16,7 +16,7 @@ class Listar extends React.Component {
         this.state = { 
             busqueda: " ",
             ventaB: [],
-            ventas:ventas, //se debe eliminar la ventasB cuando se conecte con la Api.
+            sales:sales, //se debe eliminar la ventasB cuando se conecte con la Api.
          }
     }
 
@@ -31,11 +31,10 @@ class Listar extends React.Component {
         e.persist();
         await this.setState({busqueda: e.target.value});
         this.filtrarBusqueda();
-      
     }
     
     filtrarBusqueda=()=>{
-        var search=ventas.filter(item=>{
+        var search=sales.filter(item=>{
           if (item.idVenta.toString().includes(this.state.busqueda)||
           item.fecha.toString().includes(this.state.busqueda)||
           item.idCliente.toString().includes(this.state.busqueda)||
@@ -47,7 +46,7 @@ class Listar extends React.Component {
             return item;
           }
         });
-        this.setState({ventas: search});
+        this.setState({sales: search});
     }
     
     componentDidMount(){
@@ -56,7 +55,7 @@ class Listar extends React.Component {
 
     render() { 
 
-        const{ventas}=this.state
+        const{sales}=this.state
 
         return ( 
         
@@ -91,22 +90,21 @@ class Listar extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {ventas.map(
-                        (venta) => (
-                        
+                        {sales.map(
+                        (sale) => (
                         <tr>
-                            <td>{venta.idVenta}</td>
-                            <td>{venta.fecha}</td>
-                            <td>{venta.idCliente}</td>
-                            <td>{venta.nombreCliente}</td>
-                            <td>{venta.idVendedor}</td>
-                            <td>{venta.estado}</td>
-                            <td>{venta.valorTotal}</td>
+                            <td>{sale.idVenta}</td>
+                            <td>{sale.fecha}</td>
+                            <td>{sale.idCliente}</td>
+                            <td>{sale.nombreCliente}</td>
+                            <td>{sale.idVendedor}</td>
+                            <td>{sale.estado}</td>
+                            <td>{sale.valorTotal}</td>
                             <td>
                                 <div className="btn-group" role="group" aria-label="">
                                     <Link className="btn btn-primary" to={"/editar"}> 📝 </Link>
                                     <button type="button" className="btn btn-danger"
-                                    onClick={()=>this.borrarRegistros(venta.idVenta)}
+                                    onClick={()=>this.borrarRegistros(sale.idVenta)}
                                     > 🗑 </button>
                                     
                                 </div>
