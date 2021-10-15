@@ -1,25 +1,27 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import NavBar from './Componentes/NavBar';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Inicio from './Componentes/Pages/inicio';
+import Productos from './Componentes/Pages/productos';
+import Ventas from './Componentes/Pages/ventas';
+import Administrador from './Componentes/Pages/administrador'
+import CerrarSesion from './Componentes/Pages/cerrar-sesion'
+import FooterBar from './Componentes/FooterBar/footerBar'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <NavBar />
+      <Switch>
+        <Route path='/inicio' component={Inicio} />
+        <Route path='/productos' component={Productos} />
+        <Route path='/ventas' component={Ventas} />
+        <Route path='/administrador' component={Administrador} />
+        <Route path='/cerrar-sesion' component={CerrarSesion} />
+      </Switch>
+      <FooterBar />
+    </Router>
   );
 }
-
 export default App;
