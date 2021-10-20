@@ -1,23 +1,28 @@
 import axios from "axios";
 
-const saleUrl = "http://localhost:3000/ventas/";
+const saleUrl = "http://localhost:3002/ventas";
 
-export const getSale = async (id) => {
-    return await axios.get(`${saleUrl}/${id}`);
-}
+class SaleService {
 
-export const getSales = async () => {
-    return await axios.get(`${saleUrl}/`);
-}
+    getSales(){
+        return axios.get(saleUrl + '/');
+    }
 
-export const addSale = async (sale) => {
-    return await axios.post(`${saleUrl}/`,sale);
-}
+    getSaleById(id){
+        return axios.get(saleUrl + '/' + id);
+    }
 
-export const deleteSale = async (id) => {
-    return await axios.delete(`${saleUrl}/${id}`);
-}
+    createSale(sale){
+        return axios.post(saleUrl + '/',sale);
+    }
 
-export const editSale = async (sale) => {
-    return await axios.put(`${saleUrl}/${sale._id}`,sale);
+    deleteSale(id){
+        return axios.delete(saleUrl + '/' + id);
+    }
+
+    updateSale(sale, id){
+        return axios.put(saleUrl + '/' + id, sale);
+    }
+
 }
+export default new SaleService ()
