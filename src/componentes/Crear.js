@@ -13,7 +13,10 @@ class Crear extends React.Component {
             documentoVendedor:"", 
             estado: "",
             valorTotal: "",
-            
+            _id: "",
+            valor: "",
+            cantidad: "",
+            productos:[]
          }
 
         this.changefechaHandler = this.changefechaHandler.bind(this);
@@ -22,7 +25,12 @@ class Crear extends React.Component {
         this.changedocumentoVendedorHandler = this.changedocumentoVendedorHandler.bind(this);
         this.changeestadoHandler = this.changeestadoHandler.bind(this);
         this.changevalorTotalHandler = this.changevalorTotalHandler.bind(this);
+        this.changeidHandler = this.changeidHandler.bind(this);
+        this.changevalorHandler = this.changevalorHandler.bind(this);
+        this.changecantidadHandler = this.changecantidadHandler.bind(this);
         this.saveSale = this.saveSale.bind(this);
+        this.saveProduct = this.saveProduct.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
     }
 
     componentDidMount(){
@@ -32,7 +40,7 @@ class Crear extends React.Component {
     saveSale = (e) => {
         e.preventDefault();
         let sale = {fecha: this.state.fecha, documentoCliente: this.state.documentoCliente, nombreCliente: this.state.nombreCliente,
-            documentoVendedor: this.state.documentoVendedor, estado: this.state.estado, valorTotal: this.state.valorTotal};
+            documentoVendedor: this.state.documentoVendedor, estado: this.state.estado, valorTotal: this.state.valorTotal, productos:this.state.productos};
             console.log('sale => ' + JSON.stringify(sale));
 
         SaleService.createSale(sale).then(res =>{
@@ -40,7 +48,22 @@ class Crear extends React.Component {
         });
         
     }
-    
+
+    saveProduct = (e) => {
+        e.preventDefault();
+        let producto = {_id: this.state._id, valor: this.state.valor, cantidad: this.state.cantidad};
+            console.log('product => ' + JSON.stringify(producto));
+        producto = this.state.productos.push(producto);
+            console.log(this.state.productos); 
+            this.props.history.push();   
+    }
+
+    deleteProduct(id){
+        const filtredData = this.state.productos.filter(producto => producto._id !== id);
+        this.setState({ productos: filtredData });
+    }
+        
+       
     changefechaHandler= (event) => {
         this.setState({fecha: event.target.value});
     }
@@ -63,6 +86,18 @@ class Crear extends React.Component {
 
     changevalorTotalHandler= (event) => {
         this.setState({valorTotal: event.target.value});
+    }
+
+    changeidHandler= (event) => {
+        this.setState({_id: event.target.value});
+    }
+
+    changevalorHandler= (event) => {
+        this.setState({valor: event.target.value});
+    }
+
+    changecantidadHandler= (event) => {
+        this.setState({cantidad: event.target.value});
     }
 
     render() { 
@@ -90,7 +125,7 @@ class Crear extends React.Component {
                                 <div className="form-group">
                                 <label htmlFor="">Fecha:</label>
                                 <input type="text" name="fecha" value={this.state.fecha} onChange={this.changefechaHandler} id="fecha" className="form-control" placeholder="" aria-describedby="helpId"/>
-                                <small id="helpId" className="text-muted">Fecha de la venta</small>
+                                <small id="helpId" className="text-muted">Fecha de la venta (aaaa-mm-dd)</small>
                                 </div>
                             </div>
 
@@ -136,7 +171,7 @@ class Crear extends React.Component {
                             <div className="col-md-3">  
                                 <div className="form-group">
                                 <label htmlFor="">ID Producto:</label>
-                                <input type="text" name="idProducto" id="idProducto" className="form-control" placeholder="" aria-describedby="helpId"/>
+                                <input type="text" name="_id" value={this.state._id} onChange={this.changeidHandler} id="_id" className="form-control" placeholder="" aria-describedby="helpId"/>
                                 <small id="helpId" className="text-muted">Código del producto</small>
                                 </div>
                             </div>
@@ -144,7 +179,7 @@ class Crear extends React.Component {
                             <div className="col-md-3">
                                 <div className="form-group">
                                 <label htmlFor="">Cantidad:</label>
-                                <input type="text" name="cantidad" id="cantidad" className="form-control" placeholder="" aria-describedby="helpId"/>
+                                <input type="text" name="cantidad" value={this.state.cantidad} onChange={this.changecantidadHandler} id="cantidad" className="form-control" placeholder="" aria-describedby="helpId"/>
                                 <small id="helpId" className="text-muted">Cantidad de productos</small>
                                 </div>
                             </div>
@@ -152,7 +187,7 @@ class Crear extends React.Component {
                             <div className="col-md-3">
                                 <div className="form-group">
                                 <label htmlFor="">Precio Unitario:</label>
-                                <input type="text" name="precioUnit" id="precioUnit" className="form-control" placeholder="" aria-describedby="helpId"/>
+                                <input type="text" name="valor" value={this.state.valor} onChange={this.changevalorHandler} id="valor" className="form-control" placeholder="" aria-describedby="helpId"/>
                                 <small id="helpId" className="text-muted">Precio unitario del producto</small>
                                 </div>
                             </div>
@@ -160,7 +195,7 @@ class Crear extends React.Component {
                             <div className="col-md-3 ">
                                 <br/>
                                 <div className="btn-group" role="group" aria-label="">
-                                    <button type="button" className="btn btn-secondary"> ➕ Agregar </button>
+                                    <button type="button" onClick={this.saveProduct} className="btn btn-secondary"> ➕ Agregar </button>
                                 </div>
                             </div>
                         </div>
@@ -177,16 +212,21 @@ class Crear extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>99900</td>
-                                    <td>
-                                        <div className="btn-group" role="group" aria-label="">
-                                            <button type="button" className="btn btn-danger"> 🗑 </button>
-                                        </div>
-                                    </td>
-                                </tr>  
+                                {
+                                    this.state.productos.map(
+                                    producto => 
+                                        <tr key={producto._id}>
+                                            <td>{producto._id}</td>
+                                            <td>{producto.cantidad}</td>
+                                            <td>{producto.valor}</td>
+                                            <td>
+                                                <div className="btn-group" role="group" aria-label="">
+                                                    <button type="button" onClick={() => this.deleteProduct(producto._id)} className="btn btn-danger"> 🗑 </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ) 
+                                } 
                             </tbody>
                             </table>
                             </div>

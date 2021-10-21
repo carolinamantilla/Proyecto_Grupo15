@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import SaleService from "../services/SaleService";
 
+
 class Editar extends React.Component {
     constructor(props) {
         super(props);
@@ -14,7 +15,7 @@ class Editar extends React.Component {
             estado: '',
             valorTotal: '',
             
-         }
+        }
 
         this.changefechaHandler = this.changefechaHandler.bind(this);
         this.changedocumentoClienteHandler = this.changedocumentoClienteHandler.bind(this);
@@ -24,18 +25,19 @@ class Editar extends React.Component {
         this.changevalorTotalHandler = this.changevalorTotalHandler.bind(this);
         this.updateSale = this.updateSale.bind(this);
     }
- 
-    componentDidMount(){
-        SaleService.getSaleById(this.state._id).then( (res) =>{
-            console.log(this.state._id);
-            let sale = res.data.data;
-                this.setState({fecha: sale.fecha, documentoCliente: sale.documentoCliente, nombreCliente: sale.nombreCliente,
-                    documentoVendedor: sale.documentoVendedor, estado: sale.estado, valorTotal: sale.valorTotal
-                });
-            
+
+    componentDidMount() {
+    SaleService.getSaleById(this.state._id)
+      .then(res => {
+        this.setState({fecha: res.data.fecha, documentoCliente: res.data.documentoCliente, nombreCliente: res.data.nombreCliente,
+            documentoVendedor: res.data.documentoVendedor, estado: res.data.estado, valorTotal: res.data.valorTotal
         });
+      })
+      .catch((error) => {
+        console.log(error);
+      })
     }
-    
+               
     updateSale = (e) => {
         e.preventDefault();
         let sale = {fecha: this.state.fecha, documentoCliente: this.state.documentoCliente, nombreCliente: this.state.nombreCliente,
@@ -43,6 +45,7 @@ class Editar extends React.Component {
         console.log('sale => ' + JSON.stringify(sale));
         console.log('id => ' + JSON.stringify(this.state._id));
         SaleService.updateSale(sale, this.state._id).then( res => {
+            console.log(res.data);
             this.props.history.push('/');
         });
     }
@@ -75,19 +78,19 @@ class Editar extends React.Component {
 
         return ( 
         
-        <div className="card">
+        <div className="card" >
             <div className="card-header">
                <h4>Editar Venta</h4>
             </div>
             <div className="card-body">
-            <form>
+            <form onSubmit={this.updateSale}>
                         
                         <div className="row">    
 
                             <div className="col-md-3">  
                                 <div className="form-group">
                                 <label htmlFor="">ID Venta:</label>
-                                <input type="text" readOnly name="_id" id="_id" className="form-control" placeholder="" aria-describedby="helpId"/>
+                                <input type="text" readOnly value={this.state._id} name="_id" id="_id" className="form-control" placeholder="" aria-describedby="helpId"/>
                                 <small id="helpId" className="text-muted"></small>
                                 </div>
                             </div>
@@ -96,7 +99,7 @@ class Editar extends React.Component {
                                 <div className="form-group">
                                 <label htmlFor="">Fecha:</label>
                                 <input type="text" name="fecha" value={this.state.fecha} onChange={this.changefechaHandler} id="fecha" className="form-control" placeholder="" aria-describedby="helpId"/>
-                                <small id="helpId" className="text-muted">Fecha de la venta</small>
+                                <small id="helpId" className="text-muted">Fecha de la venta (aaaa-mm-dd)</small>
                                 </div>
                             </div>
 
