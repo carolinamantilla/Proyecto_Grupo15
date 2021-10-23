@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# **BACKEND DEL PROYECTO - GRUPO 15 - Ciclo III**
+**“Aplicativo Web para gestionar la Venta de Jeans para damas ”**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+| **#**|**AUTORES** | **MODULOS** |
+| ---|---| --- |
+| 1 |**Martha Carolina Mantilla Cárdenas**  | Gestión de ingreso al sistema de información Y Modulo administrador de ventas  |
+| 2 |**Keidy Mercado Sierra**  | Modulo administrador de productos  |
+| 3 |**Yasmin Andrea Zorro Gutiérrez**  | Gestión de usuarios  |
 
-## Available Scripts
+## **DESCRIPCION DEL PROYECTO**
+Aplicativo de software que permite realizar el seguimiento de las ventas de Jeans en una empresa y hacerles el correspondiente seguimiento.
 
-In the project directory, you can run:
+## **DESCRIPCION DEL FRONTEND**
+### **INTERFACES GRÁFICAS**
+### * **Gestión De Ingreso al Sistema De Información:**
+La interfaz permite el registro e inicio de sesión; y la autorización de ingreso a la aplicación está a cargo de un tercero (Gmail) mediante Oauth 2.
+
+### * **Módulo Administrador De Productos:**
+Se realizaron dos interfaces: la primera permite el registro de productos y la segunda permite listar, buscar y actualizar productos (Cada una cuenta con los siguientes atributos: Identificador único (Inmutable), descripción, valor unitario y estado: disponible, no disponible).
+
+### * **Módulo Administrador De Ventas:**
+Se realizaron dos interfaces: la primera permite el registro de las ventas y la segunda permite listar, buscar y actualizar las ventas realizadas (Actualizar se refiere a establecer los diferentes estados de la venta: En proceso, cancelada o entregada, o editar alguno de sus otros campos modificables). Cada venta cuenta con los siguientes atributos: Identificador único de venta (Inmutable), el valor total de la venta, identificador, cantidad y precio unitario de cada producto, fecha de venta, el documento de identificación y nombre del cliente, y, además, cuenta con un encargado de gestionar dicha venta (vendedor).
+
+### * **Gestión De Usuarios:**
+La interfaz permite ver y actualizar el rol (administrador y vendedor) y el estado del usuario (pendiente/autorizado/no autorizado).
+
+## **REPOSITORIO DEL FRONTEND**
+[Repositorio en GitHub-Frontend](https://github.com/carolinamantilla/Proyecto_Grupo15.git)
+
+## TABLERO DE TRABAJO EN TRELLO:
+[Tablero en Trello](https://trello.com/b/Mi9n4pxV/proyecto-sobre-aplicativo-web)
+
+## **COMANDOS PARA EJECUTAR LA APP**
+El Framework utilizado para el Frontend en nuestro equipo fue REACT, y su comando de ejecución es npm start.
 
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
