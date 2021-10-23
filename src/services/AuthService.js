@@ -1,4 +1,4 @@
-import axios from "axios";
+/*import axios from "axios";
 import jwtDecode from "jwt-decode";
 
 //const authUrl = "https://peaceful-peak-03211.herokuapp.com/auth"; //prod
@@ -31,5 +31,5 @@ export const getCurrentUser = () => {
 const logout = () => {
     localStorage.clear();
     window.location = "/";
-}
+}*/
 

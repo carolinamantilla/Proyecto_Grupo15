@@ -2,8 +2,8 @@ import react, { useState, useEffect } from 'react';
 import { FormGroup, FormControl, InputLabel, Input, Button, makeStyles, Typography, RadioGroup, FormLabel, FormControlLabel, Radio } from '@material-ui/core';
 import { addProduct } from '../services/ProductService';
 import { useHistory } from 'react-router-dom';
-import { getCurrentUser } from '../services/AuthService';
-import { verifyToken } from '../services/AuthService';
+//import { getCurrentUser } from '../services/AuthService';
+//import { verifyToken } from '../services/AuthService';
 
 const initialValue = {
     valor: '',
@@ -24,10 +24,10 @@ const useStyles = makeStyles({
 export function CreateProduct() {
     const [user, setUser] = useState(null)
 
-    useEffect(() => {
+    /*useEffect(() => {
         verifyToken();
         setUser(getCurrentUser());
-    }, [])
+    }, [])*/
 
     const [product, setProduct] = useState(initialValue);
     const { valor, descripcion, estado } = product;

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { AppBar, Toolbar, makeStyles, Button, Box, ListItemText, ListItemAvatar, ListItem, Avatar } from '@material-ui/core'
+//import React, { useState, useEffect } from 'react'
+import { AppBar, Toolbar, makeStyles, Box } from '@material-ui/core'
 import { NavLink } from 'react-router-dom';
-import { getCurrentUser } from '../services/AuthService';
-import { blue } from '@material-ui/core/colors';
+//import { getCurrentUser } from '../services/AuthService';
+//import { blue } from '@material-ui/core/colors';
 
 const useStyle = makeStyles({
     header: {
@@ -24,23 +24,23 @@ const useStyle = makeStyles({
     }
 })
 
-const initialValue = {
+/*const initialValue = {
     email: ""
-}
+}*/
 
 export function NavBar() {
 
-    const [user, setUser] = useState(initialValue);
+    //const [user, setUser] = useState(initialValue);
     const classes = useStyle();
 
-    useEffect(() => {
+    /*useEffect(() => {
         setUser(getCurrentUser());
     }, []);
 
     const logout = () => {
         localStorage.clear();
         window.location = "/";
-    }
+    }*/
     return (
         <Box sx={{ display: 'flex', p: 1 }}>
             <AppBar position="static" className={classes.header}>
@@ -49,40 +49,11 @@ export function NavBar() {
                     <Box sx={{ flexGrow: 1 }}>
                         <NavLink className={classes.tabs} to="/">Inicio</NavLink>
                         <NavLink className={classes.tabs} to="/productos">Productos</NavLink>
-                        {user && (
+                        {(
                             <NavLink className={classes.tabs} to="/ventas">Ventas</NavLink>
                         )}
                     </Box>
-                    {!user && (
-                        <>
-                            <NavLink className={classes.tab_end} to="/registrarse">
-                                <Button variant="contained" color="primary">
-                                    Registrarse
-                                </Button>
-                            </NavLink>
-                            <NavLink className={classes.tab_end} to="/login">
-                                <Button variant="contained" color="primary">
-                                    Login
-                                </Button>
-                            </NavLink>
-                        </>)}
-                    {user && (
-                        <>
-                            <Button className={classes.tab_end} >
-                                <ListItem>
-                                    <ListItemAvatar>
-                                        <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-                                            👤
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary={user.email} />
-                                </ListItem>
-                            </Button>
-                            <Button variant="contained" onClick={() => logout()} color="secondary">
-                                Logout
-                            </Button>
-                        </>
-                    )}
+
                 </Toolbar>
             </AppBar>
         </Box>

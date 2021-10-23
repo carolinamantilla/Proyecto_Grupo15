@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Table, TableHead, TableCell, TableRow, TableBody, Button, makeStyles } from '@material-ui/core';
 import { getProducts, deleteProduct } from '../services/ProductService';
 import { Link } from 'react-router-dom';
-import { getCurrentUser } from '../services/AuthService';
+//import { getCurrentUser } from '../services/AuthService';
 
 const useStyles = makeStyles({
     table: {
@@ -32,12 +32,12 @@ const useStyles = makeStyles({
 export function ProductList() {
     const classes = useStyles();
 
-    const [user, setUser] = useState([])
+    const [user] = useState([])
     const [products, setProducts] = useState([])
 
     useEffect(() => {
         getAllProducts();
-        setUser(getCurrentUser());
+        /*setUser(getCurrentUser());*/
     }, [])
 
     const getAllProducts = async () => {
@@ -78,8 +78,7 @@ export function ProductList() {
                                 <TableCell>{product.descripcion}</TableCell>
                                 <TableCell>{product.valor}</TableCell>
                                 <TableCell>{product.estado ? "Disponible" : "Agotado"}</TableCell>
-                                {user
-                                    &&
+                                {
 
                                     (<TableCell>
                                         <Button className={classes.button} variant="contained" component={Link} to={`productos/editar/${product._id}`} color="info">Editar</Button>
