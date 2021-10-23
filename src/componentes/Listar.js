@@ -19,6 +19,7 @@ class Listar extends React.Component {
         if (callbackUser) {
         await SaleService.deleteSale(id).then(res => {
             this.setState({sales: this.state.sales.filter(sale => sale.id !== id)});
+            
         });
     }
     }
