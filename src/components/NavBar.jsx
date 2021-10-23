@@ -57,7 +57,7 @@ export function NavBar() {
                         <>
                             <NavLink className={classes.tab_end} to="/registrarse">
                                 <Button variant="contained" color="primary">
-                                    registrarse
+                                    Registrarse
                                 </Button>
                             </NavLink>
                             <NavLink className={classes.tab_end} to="/login">

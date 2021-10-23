@@ -2,8 +2,10 @@ import React from 'react'
 
 export function Home() {
     return (
+        <center>
         <div>
-            Bienvenidos al aplicativo
+            Aplicativo Web para la Venta de Jeans
         </div>
+        </center>
     )
 }
