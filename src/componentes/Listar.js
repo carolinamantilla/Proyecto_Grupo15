@@ -6,22 +6,49 @@ class Listar extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            sales:[]               
+            sales:[], 
+            find:"",
+            saleSearch:[]              
         }
         this.deleteSale = this.deleteSale.bind(this);
+        this.filtrarBusqueda = this.filtrarBusqueda.bind(this);
     }
 
-    deleteSale(id){
-        SaleService.deleteSale(id).then(res => {
+    deleteSale = async(id) =>{
+        let callbackUser = window.confirm('Estás seguro de eliminar la venta?');
+        if (callbackUser) {
+        await SaleService.deleteSale(id).then(res => {
             this.setState({sales: this.state.sales.filter(sale => sale.id !== id)});
         });
+    }
     }
 
     componentDidMount(){
         SaleService.getSales().then((res) => {
-            this.setState({ sales: res.data.data});
-            
+            this.setState({ sales: res.data.data});    
         });
+    this.setState({saleSearch: this.state.sales});
+    }
+
+    onChange= async e =>{
+        e.persist();
+        await this.setState({find: e.target.value});
+        this.filtrarBusqueda();
+    }
+
+    filtrarBusqueda=()=>{
+        var search=this.state.sales.filter(item => {
+          if (item._id.toString().includes(this.state.find)||
+          item.fecha.toString().includes(this.state.find)||
+          item.documentoCliente.toString().includes(this.state.find)||
+          item.nombreCliente.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"").includes(this.state.find)||
+          item.documentoVendedor.toString().includes(this.state.find)||
+          item.estado.toLowerCase().includes(this.state.find)
+          ){
+            return item;
+          }
+        });
+        this.setState({sales: search});
     }
 
     render() { 
@@ -38,7 +65,7 @@ class Listar extends React.Component {
                     </div>
                     <div className="col-md-3">
                         <div className="barraBusqueda">
-                            <input type="text"  placeholder="Buscar" className="textField" name="busqueda" value={this.state.busqueda} onChange={this.onChange} />
+                            <input type="text"  placeholder="Buscar" className="textField" name="busqueda" value={this.state.find} onChange={this.onChange} />
                             <button type="button" className="btnBuscar">🔍</button>
                         </div>
                     </div>
@@ -74,7 +101,7 @@ class Listar extends React.Component {
                                     <td>{sale.valorTotal}</td>
                                     <td>
                                         <div className="btn-group" role="group" aria-label="">
-                                            <Link className="btn btn-primary" to={`/editar/${sale._id}`}> 📝 </Link>
+                                            <Link className="btn btn-primary" variant="contained" to={`/editar/${sale._id}`}> 📝 </Link>
                                             <button type="button" className="btn btn-danger" onClick={ () => this.deleteSale(sale._id)}
                                             > 🗑 </button> 
                                             

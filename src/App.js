@@ -22,7 +22,7 @@ function App() {
       <br />
       <Route exact path="/" component={Listar}></Route>
       <Route exact path="/crear" component={Crear}></Route>
-      <Route exact path="/editar/" component={Editar}></Route>
+      <Route exact path="/editar/:id" component={Editar}></Route>
 
     </div>
     </Router>

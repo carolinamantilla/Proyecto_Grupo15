@@ -7,47 +7,72 @@ class Editar extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            _id: this.props.match.params._id,
-            fecha:'', 
-            documentoCliente: '', 
-            nombreCliente: '', 
-            documentoVendedor:'', 
-            estado: '',
-            valorTotal: '',
+            idVenta: this.props.match.params.id,
+            fecha:"", 
+            documentoCliente: "", 
+            nombreCliente: "", 
+            documentoVendedor: "", 
+            estado: "",
+            valorTotal: "",
+            _id: "",
+            valor: "",
+            cantidad: "",
+            productos:[]     
             
         }
-
         this.changefechaHandler = this.changefechaHandler.bind(this);
         this.changedocumentoClienteHandler = this.changedocumentoClienteHandler.bind(this);
         this.changenombreClienteHandler = this.changenombreClienteHandler.bind(this);
         this.changedocumentoVendedorHandler = this.changedocumentoVendedorHandler.bind(this);
         this.changeestadoHandler = this.changeestadoHandler.bind(this);
         this.changevalorTotalHandler = this.changevalorTotalHandler.bind(this);
+        this.changeidHandler = this.changeidHandler.bind(this);
+        this.changevalorHandler = this.changevalorHandler.bind(this);
+        this.changecantidadHandler = this.changecantidadHandler.bind(this);
         this.updateSale = this.updateSale.bind(this);
+        this.addNewProduct = this.addNewProduct.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
     }
 
     componentDidMount() {
-    SaleService.getSaleById(this.state._id)
+    SaleService.getSale(this.state.idVenta)
       .then(res => {
-        this.setState({fecha: res.data.fecha, documentoCliente: res.data.documentoCliente, nombreCliente: res.data.nombreCliente,
-            documentoVendedor: res.data.documentoVendedor, estado: res.data.estado, valorTotal: res.data.valorTotal
+        let sale = res.data.data;
+        this.setState({fecha: sale.fecha, documentoCliente: sale.documentoCliente, nombreCliente: sale.nombreCliente,
+            documentoVendedor: sale.documentoVendedor, estado: sale.estado, valorTotal: sale.valorTotal, productos: sale.productos
         });
       })
+      
       .catch((error) => {
         console.log(error);
       })
+      
     }
                
     updateSale = (e) => {
         e.preventDefault();
         let sale = {fecha: this.state.fecha, documentoCliente: this.state.documentoCliente, nombreCliente: this.state.nombreCliente,
-            documentoVendedor: this.state.documentoVendedor, estado: this.state.estado, valorTotal: this.state.valorTotal};
-        console.log('sale => ' + JSON.stringify(sale));
-        console.log('id => ' + JSON.stringify(this.state._id));
-        SaleService.updateSale(sale, this.state._id).then( res => {
+            documentoVendedor: this.state.documentoVendedor, estado: this.state.estado, valorTotal: this.state.valorTotal, productos:this.state.productos}
+        console.log('id => ' + JSON.stringify(this.state.idVenta));
+        SaleService.updateSale(sale, this.state.idVenta).then( res => {
             console.log(res.data);
             this.props.history.push('/');
         });
+    }
+
+    addNewProduct = (e) => {
+        e.preventDefault();
+        let newproducto = {_id: this.state._id, valor: this.state.valor, cantidad: this.state.cantidad};
+            console.log('product => ' + JSON.stringify(newproducto));
+        newproducto = this.state.productos.push(newproducto);
+            console.log(this.state.productos); 
+            this.props.history.push(); 
+              
+    }
+
+    deleteProduct(id){
+        const filtredData = this.state.productos.filter(producto => producto._id !== id);
+        this.setState({ productos: filtredData });
     }
 
     changefechaHandler= (event) => {
@@ -73,6 +98,18 @@ class Editar extends React.Component {
     changevalorTotalHandler= (event) => {
         this.setState({valorTotal: event.target.value});
     }
+
+    changeidHandler= (event) => {
+        this.setState({_id: event.target.value});
+    }
+
+    changevalorHandler= (event) => {
+        this.setState({valor: event.target.value});
+    }
+
+    changecantidadHandler= (event) => {
+        this.setState({cantidad: event.target.value});
+    }
        
     render() { 
 
@@ -90,7 +127,7 @@ class Editar extends React.Component {
                             <div className="col-md-3">  
                                 <div className="form-group">
                                 <label htmlFor="">ID Venta:</label>
-                                <input type="text" readOnly value={this.state._id} name="_id" id="_id" className="form-control" placeholder="" aria-describedby="helpId"/>
+                                <input type="text" readOnly value={this.state.idVenta} name="idVenta" id="idVenta" className="form-control" placeholder="" aria-describedby="helpId"/>
                                 <small id="helpId" className="text-muted"></small>
                                 </div>
                             </div>
@@ -146,7 +183,7 @@ class Editar extends React.Component {
                             <div className="col-md-3">  
                                 <div className="form-group">
                                 <label htmlFor="">ID Producto:</label>
-                                <input type="text" name="idProducto" id="idProducto" className="form-control" placeholder="" aria-describedby="helpId"/>
+                                <input type="text" name="_id" value={this.state._id} onChange={this.changeidHandler} id="_id" className="form-control" placeholder="" aria-describedby="helpId"/>
                                 <small id="helpId" className="text-muted">Código del producto</small>
                                 </div>
                             </div>
@@ -154,7 +191,7 @@ class Editar extends React.Component {
                             <div className="col-md-3">
                                 <div className="form-group">
                                 <label htmlFor="">Cantidad:</label>
-                                <input type="text" name="cantidad" id="cantidad" className="form-control" placeholder="" aria-describedby="helpId"/>
+                                <input type="text" name="cantidad" value={this.state.cantidad} onChange={this.changecantidadHandler} id="cantidad" className="form-control" placeholder="" aria-describedby="helpId"/>
                                 <small id="helpId" className="text-muted">Cantidad de productos</small>
                                 </div>
                             </div>
@@ -162,7 +199,7 @@ class Editar extends React.Component {
                             <div className="col-md-3">
                                 <div className="form-group">
                                 <label htmlFor="">Precio Unitario:</label>
-                                <input type="text" name="precioUnit" id="precioUnit" className="form-control" placeholder="" aria-describedby="helpId"/>
+                                <input type="text" name="valor" value={this.state.valor} onChange={this.changevalorHandler} id="valor" className="form-control" placeholder="" aria-describedby="helpId"/>
                                 <small id="helpId" className="text-muted">Precio unitario del producto</small>
                                 </div>
                             </div>
@@ -170,7 +207,7 @@ class Editar extends React.Component {
                             <div className="col-md-3 ">
                                 <br/>
                                 <div className="btn-group" role="group" aria-label="">
-                                    <button type="button" className="btn btn-secondary">📥Editar Producto</button>
+                                    <button type="button" onClick={this.addNewProduct} className="btn btn-secondary">📥Agregar nuevo producto</button>
                                 </div>
                             </div>
 
@@ -189,17 +226,18 @@ class Editar extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>99900</td>
-                                    <td>
+                            {
+                                this.state.productos.map(
+                                    producto => 
+                                        <tr key={producto._id}>
+                                            <td>{producto._id}</td>
+                                            <td>{producto.cantidad}</td>
+                                            <td>{producto.valor}</td>
                                         <div className="btn-group" role="group" aria-label="">
-                                            <button type="button" className="btn btn-primary"> 📝 </button>
-                                            <button type="button" className="btn btn-danger"> 🗑 </button>
-                                        </div>
-                                    </td>
-                                </tr>  
+                                            <button type="button" onClick={() => this.deleteProduct(producto._id)} className="btn btn-danger"> 🗑 </button>
+                                        </div>    
+                                    </tr>
+                                )}  
                             </tbody>
                             </table>
                             </div>

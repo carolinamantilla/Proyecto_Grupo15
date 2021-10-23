@@ -8,7 +8,7 @@ class SaleService {
         return axios.get(saleUrl + '/');
     }
 
-    getSaleById(id){
+    getSale(id){
         return axios.get(saleUrl + '/' + id);
     }
 
@@ -16,7 +16,7 @@ class SaleService {
         return axios.post(saleUrl + '/',sale);
     }
 
-    deleteSale(id){
+    deleteSale (id){
         return axios.delete(saleUrl + '/' + id);
     }
 

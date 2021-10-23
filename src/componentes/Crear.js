@@ -7,7 +7,7 @@ class Crear extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            fecha:"", 
+            fecha:"2021-01-01", 
             documentoCliente: "", 
             nombreCliente: "", 
             documentoVendedor:"", 
@@ -55,7 +55,8 @@ class Crear extends React.Component {
             console.log('product => ' + JSON.stringify(producto));
         producto = this.state.productos.push(producto);
             console.log(this.state.productos); 
-            this.props.history.push();   
+            this.props.history.push(); 
+              
     }
 
     deleteProduct(id){
