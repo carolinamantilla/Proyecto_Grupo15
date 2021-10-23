@@ -1,4 +1,4 @@
-# **BACKEND DEL PROYECTO - GRUPO 15 - Ciclo III**
+# **FRONTEND DEL PROYECTO - GRUPO 15 - Ciclo III**
 **“Aplicativo Web para gestionar la Venta de Jeans para damas ”**
 
 | **#**|**AUTORES** | **MODULOS** |
