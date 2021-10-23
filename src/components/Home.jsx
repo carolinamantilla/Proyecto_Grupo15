@@ -2,10 +2,16 @@ import React from 'react'
 
 export function Home() {
     return (
-        <center>
-        <div>
-            Aplicativo Web para la Venta de Jeans
-        </div>
-        </center>
-    )
-}
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '20vh'
+      }}
+    >
+      <h1>Bienvenido al Aplicativo Web del Grupo 15</h1>
+    </div>
+  );
+};
+

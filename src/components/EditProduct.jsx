@@ -1,8 +1,17 @@
 import react, { useState, useEffect } from 'react';
-import { FormGroup, FormControl, InputLabel, Input, Button, makeStyles, Typography, RadioGroup, FormLabel, FormControlLabel, Radio } from '@material-ui/core';
+import { FormGroup, 
+    FormControl, 
+    InputLabel, 
+    Input, 
+    Button, 
+    makeStyles, 
+    Typography, 
+    RadioGroup, 
+    FormLabel, 
+    FormControlLabel, 
+    Radio } from '@material-ui/core';
 import { editProduct, getProduct } from '../services/ProductService';
 import { useHistory, useParams } from 'react-router-dom';
-//import { verifyToken } from '../services/AuthService'
 
 const initialValue = {
     valor: '',
@@ -53,7 +62,7 @@ export function EditProduct() {
 
     return (
         <FormGroup className={classes.container}>
-            <Typography variant="h4">Editar Producto</Typography>
+            <Typography variant="h4"><center>Editar Producto</center></Typography>
             <FormControl>
                 <InputLabel htmlFor="my-input">Descripción</InputLabel>
                 <Input onChange={(e) => onValueChange(e)} name="descripcion" value={descripcion} id="my-input" />
@@ -75,7 +84,7 @@ export function EditProduct() {
                 </RadioGroup>
             </FormControl>
             <FormControl>
-                <Button variant="contained" onClick={() => updateProductData()} color="primary">Editar Producto</Button>
+                <Button variant="contained" onClick={() => updateProductData()} color="primary">Actualizar</Button>
             </FormControl>
         </FormGroup>
     )

@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Table, TableHead, TableCell, TableRow, TableBody, Button, makeStyles } from '@material-ui/core';
+import { Table, 
+    TableHead, 
+    TableCell, 
+    TableRow, 
+    TableBody, 
+    Button, 
+    makeStyles } from '@material-ui/core';
 import { getProducts, deleteProduct } from '../services/ProductService';
 import { Link } from 'react-router-dom';
-//import { getCurrentUser } from '../services/AuthService';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles({
     table: {
@@ -37,7 +45,6 @@ export function ProductList() {
 
     useEffect(() => {
         getAllProducts();
-        /*setUser(getCurrentUser());*/
     }, [])
 
     const getAllProducts = async () => {
@@ -55,17 +62,18 @@ export function ProductList() {
     }
 
     return (
-        <>
             <Table className={classes.table}>
                 <TableHead>
                     <TableRow className={classes.thead}>
-                        <TableCell>Id</TableCell>
+                        <TableCell><center>Id</center></TableCell>
                         <TableCell>Descripción</TableCell>
                         <TableCell>Valor</TableCell>
                         <TableCell>Estado</TableCell>
-                        {user && (
+                        {(
                             <TableCell className={classes.button_add}>
-                                <Button variant="contained" color="primary" component={Link} to="productos/agregar" >Agregar</Button>
+                                <center>
+                                <Button variant="contained" color="primary" startIcon={<AddIcon/>} component={Link} to="productos/agregar" >Agregar</Button>
+                                </center>
                             </TableCell>
                         )}
                     </TableRow>
@@ -81,8 +89,13 @@ export function ProductList() {
                                 {
 
                                     (<TableCell>
-                                        <Button className={classes.button} variant="contained" component={Link} to={`productos/editar/${product._id}`} color="info">Editar</Button>
-                                        <Button variant="contained" color="secondary" onClick={() => deleteProductData(product._id)} >Eliminar</Button>
+                                        <center>
+                                        <Button className={classes.button} variant="contained" startIcon={<EditIcon/>}component={Link} to={`productos/editar/${product._id}`} color="info">Editar</Button>
+                                        &nbsp;
+                                        </center>
+                                        <center>
+                                        <Button variant="contained" color="secondary" startIcon={<DeleteIcon/>} onClick={() => deleteProductData(product._id)} >Eliminar</Button>
+                                        </center>
                                     </TableCell>)
                                 }
                             </TableRow>
@@ -90,6 +103,6 @@ export function ProductList() {
                     }
                 </TableBody>
             </Table>
-        </>
+        
     )
 }

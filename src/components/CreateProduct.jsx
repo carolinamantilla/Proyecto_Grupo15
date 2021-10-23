@@ -1,9 +1,18 @@
-import react, { useState, useEffect } from 'react';
-import { FormGroup, FormControl, InputLabel, Input, Button, makeStyles, Typography, RadioGroup, FormLabel, FormControlLabel, Radio } from '@material-ui/core';
+import react, { useState } from 'react';
+import { 
+    FormGroup, 
+    FormControl, 
+    InputLabel, 
+    Input, 
+    Button, 
+    makeStyles, 
+    Typography, 
+    RadioGroup, 
+    FormLabel, 
+    FormControlLabel, 
+    Radio } from '@material-ui/core';
 import { addProduct } from '../services/ProductService';
 import { useHistory } from 'react-router-dom';
-//import { getCurrentUser } from '../services/AuthService';
-//import { verifyToken } from '../services/AuthService';
 
 const initialValue = {
     valor: '',
@@ -22,13 +31,7 @@ const useStyles = makeStyles({
 })
 
 export function CreateProduct() {
-    const [user, setUser] = useState(null)
-
-    /*useEffect(() => {
-        verifyToken();
-        setUser(getCurrentUser());
-    }, [])*/
-
+    
     const [product, setProduct] = useState(initialValue);
     const { valor, descripcion, estado } = product;
 
@@ -50,7 +53,7 @@ export function CreateProduct() {
 
     return (
         <FormGroup className={classes.container}>
-            <Typography variant="h4">Agregar Producto</Typography>
+            <Typography variant="h4"><center>Agregar Nuevo Producto</center></Typography>
             <FormControl>
                 <InputLabel htmlFor="my-input">Descripción</InputLabel>
                 <Input onChange={(e) => onValueChange(e)} name="descripcion" value={descripcion} id="my-input" />

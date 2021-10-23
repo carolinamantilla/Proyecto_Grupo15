@@ -13,5 +13,11 @@ const data = {
       image: "https://www.freepik.es/foto-gratis/chicas-jeans-sosteniendo-pancarta-vacia_11599986.htm#page=1&query=women%20jeans&position=10&from_view=search",
       category: "Jeans",
     },
+    {
+      id: 3,
+      title: "Jeans2",
+      image: "https://thumbs.dreamstime.com/b/jeans-word-abstract-38224587.jpg",
+      category: "Jeans",
+    },
   ],
 };
